@@ -7,7 +7,7 @@ document.addEventListener('click', function(event){
 
 addNewSumBtn.addEventListener('click', addNewSum);
 
-addNewDebtBtn.addEventListener('click', createNewDebt)
+addNewDebtBtn.addEventListener('click', createNewDebtModal)
 
 function createNewPayment(sumValue){
     let listElem = document.createElement('p');
@@ -63,10 +63,18 @@ function createNewPayment(sumValue){
     list.prepend(listElem)
 }
 
-function createNewDebt(){
+function createNewDebtModal(){
     createModal();
     let modal = document.querySelector('.modal');
     let modalWrp = document.querySelector('.modal-wrapper');
+
+    let inputBank = document.createElement('input');
+    inputBank.classList.add('input-bank');
+    inputBank.placeholder = 'Введите название банка';
+
+    let inputDebt = document.createElement('input');
+    inputDebt.classList.add('input-debt');
+    inputDebt.placeholder = 'Введите сумму долга';
 
     let btnsWrp = document.createElement('div')
     btnsWrp.classList.add('buttons-wrapper')
@@ -82,9 +90,12 @@ function createNewDebt(){
     acceptBtn.classList.add('default', 'button');
     acceptBtn.textContent = 'Подтвердить';
     acceptBtn.addEventListener('click', function(){
+        addNewDebt(inputBank.value, inputDebt.value);
         modal.remove();
     })
 
+    modalWrp.appendChild(inputBank);
+    modalWrp.appendChild(inputDebt);
     btnsWrp.appendChild(closeBtn);
     btnsWrp.appendChild(acceptBtn);
     modalWrp.appendChild(btnsWrp);
@@ -125,7 +136,30 @@ function addNewSum(){
     modalWrp.appendChild(inputNewSum);
 }
 
+function addNewDebt(titleName, total){
+    let container = createDOMelement('div', 'container');
+    container.classList.add('credit-alpha-container');
+
+    let creditWrp = createDOMelement('div', 'credit-alpha');
+
+    let title = createDOMelement('div', 'alpha-title');
+    title.textContent = titleName;
+
+    let totalDebt = createDOMelement('div', 'total-debt');
+    totalDebt.textContent = `Долг: ${total}руб`;
+
+    creditWrp.appendChild(title);
+    creditWrp.appendChild(totalDebt);
+    container.appendChild(creditWrp);
+    WRAPPER.appendChild(container);
+}
 function rewriteTotalDebtSum(){
     totalDebtSumDiv.textContent = TOTAL_DEBT;
 }
 rewriteTotalDebtSum()
+
+function createDOMelement(selector, className){
+    let domElem = document.createElement(selector);
+    domElem.classList.add(className);
+    return domElem;
+}
