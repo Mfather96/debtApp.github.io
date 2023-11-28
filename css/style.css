@@ -10,18 +10,25 @@
     max-height: 1000px;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(180deg, rgb(219,219,219) 0%, rgba(255,255,255,0.7) 100%);
+    background: url('../img/bg.jpg');
 }
 .container {
     margin-top: 5px;
-    border-bottom: 2px solid #999;
-    border-top: 2px solid #999;
+    background: #fff;
+    margin: 5px 2px 0px;
+    border-radius: 7px;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }
 .add-new-debt {
-    line-height: 35px;
+    line-height: 50px;
     text-align: center;
-    background: rgb(247, 247, 222);
-    border-bottom: 2px dashed #999;
+    background: rgb(139 206 245);
+    margin-top: 5px;
+    width: 250px;
+    margin: 5px auto 0px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
 }
 #total-debt {
     width: 100%;
