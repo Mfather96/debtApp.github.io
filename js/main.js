@@ -1,34 +1,26 @@
-
-// addNewSumBtn.addEventListener('click', addNewSum);
-
+rewriteTotalDebtSum();
 addNewDebtBtn.addEventListener('click', createNewDebtModal)
 
 function createNewPayment(sumValue, listAppend){
-    let listElem = document.createElement('p');
-    listElem.classList.add('list-elem');
+    let listElem = createDOMelement('p', 'list-elem');
 
-    let date = document.createElement('span');
-    date.classList.add('date-enter');
+    let date = createDOMelement('span', 'date-enter');
     date.textContent = createNewDate();
 
-    let sum = document.createElement('span');
-    sum.classList.add('sum-enter');
+    let sum = createDOMelement('span', 'sum-enter');
     sum.textContent = `Внесено: ${sumValue}руб`;
 
-    let deleteElem = document.createElement('span');
-    deleteElem.classList.add('delete-elem');
+    let deleteElem = createDOMelement('span', 'delete-elem');
     deleteElem.textContent = 'Удалить';
     deleteElem.addEventListener('click', function(){
         createModal();
         let modal = document.querySelector('.modal');
         let modalWrp = document.querySelector('.modal-wrapper');
 
-        let confirm = document.createElement('div');
-        confirm.classList.add('confirm-delete');
+        let confirm = createDOMelement('div', 'confirm-delete');
         confirm.textContent = 'Точно удалить внесенный платеж?';
 
-        let btnsWrp = document.createElement('div')
-        btnsWrp.classList.add('buttons-wrapper')
+        let btnsWrp = createDOMelement('div', 'buttons-wrapper')
 
         let closeBtn = document.createElement('div');
         closeBtn.classList.add('secondary', 'button');
@@ -96,6 +88,7 @@ function createNewDebtModal(){
 }
 
 function addNewSum(listContainer){
+    console.log('new sum');
     createModal();
     let modal = document.querySelector('.modal');
     let modalWrp = document.querySelector('.modal-wrapper');
@@ -138,7 +131,9 @@ function addNewDebt(titleName, total){
         let title = createDOMelement('div', 'alpha-title');
         title.textContent = titleName;
         let totalDebt = createDOMelement('div', 'total-debt');
-        totalDebt.textContent = `Долг: ${total}руб`;
+        // let totalDebtSum = createDOMelement('span', 'total-debt-sum');
+        // totalDebtSum.textContent = total;
+        totalDebt.innerHTML = `Долг: <span class="total-dept-sum">${total}</span>руб`;
 
     let list = createDOMelement('div', 'alpha-list');
     let newSum = createDOMelement('div', 'enter-new-sum');
@@ -150,11 +145,9 @@ function addNewDebt(titleName, total){
     container.appendChild(creditWrp);
     container.appendChild(list);
     WRAPPER.appendChild(container);
+    rewriteTotalDebtSum()
 }
-// function rewriteTotalDebtSum(){
-//     totalDebtSumDiv.textContent = TOTAL_DEBT;
-// }
-// rewriteTotalDebtSum()
+
 
 function createDOMelement(selector, className){
     let domElem = document.createElement(selector);
@@ -164,12 +157,37 @@ function createDOMelement(selector, className){
 
 WRAPPER.addEventListener('click', function(event){
     let container = event.target.closest('.container');
-    if(container){
-        let list = container.querySelector('.alpha-list');
-        let addNewSumBtn = list.querySelector('.enter-new-sum')
+    if(!container){
+        return;
+    }
+    let credit = container.querySelector('.credit-alpha');
+    let list = container.querySelector('.alpha-list');
+    if(event.target == credit){
         list.classList.toggle('active');
-        addNewSumBtn.addEventListener('click', function(){
-            addNewSum(list)
-        })
+    }
+    for(let addSumBtn of addSumBtns){
+        if(event.target == addSumBtn){
+                addNewSum(list)
+        }
     }
 })
+
+
+
+
+function rewriteTotalDebtSum(){
+    let containers = WRAPPER.getElementsByClassName('container');
+
+    if(!containers){
+        return;
+    }
+
+    TOTAL_DEBT = 0;
+    for(let container of containers){
+        let sumContainer = container.querySelector('.total-debt span');
+        TOTAL_DEBT += Number(sumContainer.textContent);
+        console.log(sumContainer.textContent);
+        console.log(container);
+    }
+    totalDebtSumDiv.textContent = parseInt(TOTAL_DEBT) + ' руб';
+}
