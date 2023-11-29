@@ -1,15 +1,9 @@
-document.addEventListener('click', function(event){
 
-    if(event.target == creditAlphaHeader){
-        list.classList.toggle('active')
-    }
-})
-
-addNewSumBtn.addEventListener('click', addNewSum);
+// addNewSumBtn.addEventListener('click', addNewSum);
 
 addNewDebtBtn.addEventListener('click', createNewDebtModal)
 
-function createNewPayment(sumValue){
+function createNewPayment(sumValue, listAppend){
     let listElem = document.createElement('p');
     listElem.classList.add('list-elem');
 
@@ -60,7 +54,7 @@ function createNewPayment(sumValue){
     listElem.appendChild(date);
     listElem.appendChild(sum);
     listElem.appendChild(deleteElem);
-    list.prepend(listElem)
+    listAppend.prepend(listElem)
 }
 
 function createNewDebtModal(){
@@ -101,7 +95,7 @@ function createNewDebtModal(){
     modalWrp.appendChild(btnsWrp);
 }
 
-function addNewSum(){
+function addNewSum(listContainer){
     createModal();
     let modal = document.querySelector('.modal');
     let modalWrp = document.querySelector('.modal-wrapper');
@@ -126,7 +120,7 @@ function addNewSum(){
     acceptBtn.classList.add('default', 'button');
     acceptBtn.textContent = 'Подтвердить';
     acceptBtn.addEventListener('click', function(){
-        createNewPayment(inputNewSum.value);
+        createNewPayment(inputNewSum.value, listContainer);
         modal.remove();
     })
 
@@ -141,25 +135,41 @@ function addNewDebt(titleName, total){
     container.classList.add('credit-alpha-container');
 
     let creditWrp = createDOMelement('div', 'credit-alpha');
+        let title = createDOMelement('div', 'alpha-title');
+        title.textContent = titleName;
+        let totalDebt = createDOMelement('div', 'total-debt');
+        totalDebt.textContent = `Долг: ${total}руб`;
 
-    let title = createDOMelement('div', 'alpha-title');
-    title.textContent = titleName;
+    let list = createDOMelement('div', 'alpha-list');
+    let newSum = createDOMelement('div', 'enter-new-sum');
+    newSum.textContent = 'Внести новую сумму';
 
-    let totalDebt = createDOMelement('div', 'total-debt');
-    totalDebt.textContent = `Долг: ${total}руб`;
-
+    list.appendChild(newSum);
     creditWrp.appendChild(title);
     creditWrp.appendChild(totalDebt);
     container.appendChild(creditWrp);
+    container.appendChild(list);
     WRAPPER.appendChild(container);
 }
-function rewriteTotalDebtSum(){
-    totalDebtSumDiv.textContent = TOTAL_DEBT;
-}
-rewriteTotalDebtSum()
+// function rewriteTotalDebtSum(){
+//     totalDebtSumDiv.textContent = TOTAL_DEBT;
+// }
+// rewriteTotalDebtSum()
 
 function createDOMelement(selector, className){
     let domElem = document.createElement(selector);
     domElem.classList.add(className);
     return domElem;
 }
+
+WRAPPER.addEventListener('click', function(event){
+    let container = event.target.closest('.container');
+    if(container){
+        let list = container.querySelector('.alpha-list');
+        let addNewSumBtn = list.querySelector('.enter-new-sum')
+        list.classList.toggle('active');
+        addNewSumBtn.addEventListener('click', function(){
+            addNewSum(list)
+        })
+    }
+})
