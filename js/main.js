@@ -8,7 +8,12 @@ function createNewPayment(sumValue, listAppend){
     date.textContent = createNewDate();
 
     let sum = createDOMelement('span', 'sum-enter');
-    sum.innerHTML = `Внесено: <span class="payed">${sumValue}</span>руб`;
+    if(Number(sumValue) > 0){
+        sum.innerHTML = `Внесено: <span class="payed">${sumValue}</span>руб`;
+    } else {
+        sum.classList.add('red')
+        sum.innerHTML = `Потрачено: <span class="payed">${sumValue}</span>руб`;
+    }
 
     let deleteElem = createDOMelement('span', 'delete-elem');
     deleteElem.textContent = 'Удалить';
