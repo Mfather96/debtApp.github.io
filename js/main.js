@@ -8,7 +8,7 @@ function createNewPayment(sumValue, listAppend){
     date.textContent = createNewDate();
 
     let sum = createDOMelement('span', 'sum-enter');
-    sum.textContent = `Внесено: ${sumValue}руб`;
+    sum.innerHTML = `Внесено: <span class="payed">${sumValue}</span>руб`;
 
     let deleteElem = createDOMelement('span', 'delete-elem');
     deleteElem.textContent = 'Удалить';
@@ -35,18 +35,23 @@ function createNewPayment(sumValue, listAppend){
         acceptBtn.addEventListener('click', function(){
             listElem.remove();
             modal.remove();
+            rewriteBankDebt();
+            rewriteTotalDebtSum();
         })
 
         btnsWrp.appendChild(closeBtn);
         btnsWrp.appendChild(acceptBtn);
         modalWrp.appendChild(confirm)
         modalWrp.appendChild(btnsWrp);
+        
     })
 
     listElem.appendChild(date);
     listElem.appendChild(sum);
     listElem.appendChild(deleteElem);
-    listAppend.prepend(listElem)
+    listAppend.prepend(listElem);
+    rewriteBankDebt();
+    rewriteTotalDebtSum();
 }
 
 function createNewDebtModal(){
@@ -88,7 +93,6 @@ function createNewDebtModal(){
 }
 
 function addNewSum(listContainer){
-    console.log('new sum');
     createModal();
     let modal = document.querySelector('.modal');
     let modalWrp = document.querySelector('.modal-wrapper');
@@ -126,13 +130,12 @@ function addNewSum(listContainer){
 function addNewDebt(titleName, total){
     let container = createDOMelement('div', 'container');
     container.classList.add('credit-alpha-container');
+    container.dataset.firstDebt = total;
 
     let creditWrp = createDOMelement('div', 'credit-alpha');
         let title = createDOMelement('div', 'alpha-title');
         title.textContent = titleName;
         let totalDebt = createDOMelement('div', 'total-debt');
-        // let totalDebtSum = createDOMelement('span', 'total-debt-sum');
-        // totalDebtSum.textContent = total;
         totalDebt.innerHTML = `Долг: <span class="total-dept-sum">${total}</span>руб`;
 
     let list = createDOMelement('div', 'alpha-list');
@@ -174,7 +177,26 @@ WRAPPER.addEventListener('click', function(event){
 
 
 
+function rewriteBankDebt(){
+    let containers = WRAPPER.getElementsByClassName('container');
 
+    if(!containers){
+        return;
+    }
+
+    for(let container of containers){
+        let sumContainer = container.querySelector('.total-debt span');
+        let firstSum = Number(container.dataset.firstDebt);
+        let payeds = container.querySelectorAll('.sum-enter span');
+        for(let pay of payeds){
+            console.log(pay);
+            firstSum -= Number(pay.textContent);
+        }
+        sumContainer.textContent = firstSum;
+        // sumContainer.textContent = sumContainer.textContent - Number(payeds[0].textContent);
+
+    }
+}
 function rewriteTotalDebtSum(){
     let containers = WRAPPER.getElementsByClassName('container');
 
@@ -186,8 +208,6 @@ function rewriteTotalDebtSum(){
     for(let container of containers){
         let sumContainer = container.querySelector('.total-debt span');
         TOTAL_DEBT += Number(sumContainer.textContent);
-        console.log(sumContainer.textContent);
-        console.log(container);
     }
     totalDebtSumDiv.textContent = parseInt(TOTAL_DEBT) + ' руб';
 }
