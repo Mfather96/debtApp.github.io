@@ -14,40 +14,40 @@ function createNewPayment(sumValue, listAppend){
 
     let deleteElem = createDOMelement('span', 'delete-elem');
     deleteElem.textContent = 'Удалить';
-    deleteElem.addEventListener('click', function(){
-        createModal();
-        let modal = document.querySelector('.modal');
-        let modalWrp = document.querySelector('.modal-wrapper');
+    // deleteElem.addEventListener('click', function(){
+    //     createModal();
+    //     let modal = document.querySelector('.modal');
+    //     let modalWrp = document.querySelector('.modal-wrapper');
 
-        let confirm = createDOMelement('div', 'confirm-delete');
-        confirm.textContent = 'Точно удалить внесенный платеж?';
+    //     let confirm = createDOMelement('div', 'confirm-delete');
+    //     confirm.textContent = 'Точно удалить внесенный платеж?';
 
-        let btnsWrp = createDOMelement('div', 'buttons-wrapper')
+    //     let btnsWrp = createDOMelement('div', 'buttons-wrapper')
 
-        let closeBtn = document.createElement('div');
-        closeBtn.classList.add('secondary', 'button');
-        closeBtn.textContent = 'Нет';
-        closeBtn.addEventListener('click', function(){
-            modal.remove();
-        })
+    //     let closeBtn = document.createElement('div');
+    //     closeBtn.classList.add('secondary', 'button');
+    //     closeBtn.textContent = 'Нет';
+    //     closeBtn.addEventListener('click', function(){
+    //         modal.remove();
+    //     })
 
-        let acceptBtn = document.createElement('div');
-        acceptBtn.classList.add('default', 'button');
-        acceptBtn.textContent = 'Да';
-        acceptBtn.addEventListener('click', function(){
-            listElem.remove();
-            modal.remove();
-            rewriteBankDebt();
-            rewriteTotalDebtSum();
-            setToLocalStorage();
-        })
+    //     let acceptBtn = document.createElement('div');
+    //     acceptBtn.classList.add('default', 'button');
+    //     acceptBtn.textContent = 'Да';
+    //     acceptBtn.addEventListener('click', function(){
+    //         listElem.remove();
+    //         modal.remove();
+    //         rewriteBankDebt();
+    //         rewriteTotalDebtSum();
+    //         setToLocalStorage();
+    //     })
 
-        btnsWrp.appendChild(closeBtn);
-        btnsWrp.appendChild(acceptBtn);
-        modalWrp.appendChild(confirm)
-        modalWrp.appendChild(btnsWrp);
+    //     btnsWrp.appendChild(closeBtn);
+    //     btnsWrp.appendChild(acceptBtn);
+    //     modalWrp.appendChild(confirm)
+    //     modalWrp.appendChild(btnsWrp);
 
-    })
+    // })
 
     listElem.appendChild(date);
     listElem.appendChild(sum);
@@ -94,6 +94,7 @@ function createNewDebtModal(){
     btnsWrp.appendChild(closeBtn);
     btnsWrp.appendChild(acceptBtn);
     modalWrp.appendChild(btnsWrp);
+    inputBank.focus();
 }
 
 function addNewSum(listContainer){
@@ -106,6 +107,7 @@ function addNewSum(listContainer){
     inputNewSum.placeholder = 'Внесенная сумма';
     inputNewSum.classList.add('input-new-sum');
     inputNewSum.type = 'number';
+
 
     let btnsWrp = document.createElement('div')
     btnsWrp.classList.add('buttons-wrapper')
@@ -129,6 +131,7 @@ function addNewSum(listContainer){
     btnsWrp.appendChild(acceptBtn);
     modalWrp.appendChild(btnsWrp);
     modalWrp.appendChild(inputNewSum);
+    inputNewSum.focus();
 }
 
 function addNewDebt(titleName, total){
