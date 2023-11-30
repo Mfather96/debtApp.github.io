@@ -1,4 +1,6 @@
+
 const WRAPPER = document.querySelector('.wrapper');
+const CONTENT = document.querySelector('.content');
 let addSumBtns = document.getElementsByClassName('enter-new-sum');
 let totalDebtSumDiv = document.querySelector('.total-debt-sum');
 let addNewDebtBtn = document.querySelector('.add-new-debt');

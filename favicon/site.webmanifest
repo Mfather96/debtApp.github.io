@@ -1,7 +1,7 @@
 {
     "name": "debtApp",
     "short_name": "debtApp",
-    "start_url": "https://mfather96.github.io/debtApp.github.io/",
+    "start_url": "/",
     "icons": [
         {
             "src": "android-chrome-192x192.png",

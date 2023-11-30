@@ -19,6 +19,9 @@
     border-radius: 7px;
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }
+.container.active {
+    box-shadow: 0 0 1px 2px #3097997a;
+}
 .add-new-debt {
     line-height: 50px;
     text-align: center;
@@ -58,13 +61,13 @@
     color: rgb(104, 203, 241);
     text-shadow: 0 0 1px #000;
 }
-.credit-alpha {
+.credit-line {
     padding: 5px;
     line-height: 50px;
     display: flex;
     justify-content: space-between;
 }
-.alpha-list {
+.credit-list {
     /* padding-top: 10px; */
     font-size: 14px;
     background: #e0e0e0;
@@ -73,15 +76,15 @@
     overflow: hidden;
     border-radius: 0 0 7px 7px;
 }
-.alpha-list.active {
+.credit-list.active {
     height: 100%;
 }
-.alpha-list p {
+.credit-list p {
     padding: 5px 15px;
     display: flex;
     justify-content: space-between;
 }
-.alpha-list p:first-child {
+.credit-list p:first-child {
     margin-top: 10px;
 }
 .enter-new-sum {
@@ -144,4 +147,7 @@
 }
 .sum-enter.red {
     color: red;
+}
+.content {
+    padding-bottom: 130px;
 }
