@@ -10,18 +10,28 @@
     max-height: 1000px;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(180deg, rgb(219,219,219) 0%, rgba(255,255,255,0.7) 100%);
+    background: url('../img/bg.jpg');
 }
 .container {
     margin-top: 5px;
-    border-bottom: 2px solid #999;
-    border-top: 2px solid #999;
+    background: #fff;
+    margin: 5px 2px 0px;
+    border-radius: 7px;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+.container.active {
+    box-shadow: 0 0 1px 2px #3097997a;
 }
 .add-new-debt {
-    line-height: 35px;
+    line-height: 50px;
     text-align: center;
-    background: rgb(247, 247, 222);
-    border-bottom: 2px dashed #999;
+    background: rgb(139 206 245);
+    margin-top: 5px;
+    width: 250px;
+    margin: 5px auto 0px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
 }
 #total-debt {
     width: 100%;
@@ -51,33 +61,41 @@
     color: rgb(104, 203, 241);
     text-shadow: 0 0 1px #000;
 }
-.credit-alpha {
+.credit-line {
     padding: 5px;
     line-height: 50px;
     display: flex;
     justify-content: space-between;
 }
-.alpha-list {
+.credit-list {
+    /* padding-top: 10px; */
     font-size: 14px;
-    background: #ebcece;
+    background: #e0e0e0;
+    color: rgba(0, 0, 0, 0.8);
     height: 0;
     overflow: hidden;
+    border-radius: 0 0 7px 7px;
 }
-.alpha-list.active {
-    border-top: 2px solid #999;
+.credit-list.active {
     height: 100%;
 }
-.alpha-list p {
+.credit-list p {
     padding: 5px 15px;
     display: flex;
     justify-content: space-between;
 }
+.credit-list p:first-child {
+    margin-top: 10px;
+}
 .enter-new-sum {
     line-height: 35px;
-    background: rgb(222, 247, 222);
+    background: rgb(53 126 53);
     text-align: center;
-    width: 100%;
-    border-top: 1px solid #999;
+    width: 160px;
+    margin: 10px auto 10px;
+    border-radius: 5px;
+    color: #fff;
+    box-shadow: 0 0.5px 4px rgba(0, 0, 0, 0.7);
 }
 .input-new-sum {
     width: 83%;
@@ -94,4 +112,42 @@
     font-size: 24px;
     text-align: center;
     margin-top: 40px;
+}
+
+.input-bank {
+    text-align: center;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: 30px;
+    width: 258px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    color: #333;
+}
+
+.input-debt {
+    text-align: center;
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: 30px;
+    width: 258px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    color: #333;
+}
+
+.sum-enter {
+    color: green;
+}
+.sum-enter.red {
+    color: red;
+}
+.content {
+    padding-bottom: 130px;
 }
