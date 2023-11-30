@@ -1,4 +1,4 @@
-rewriteTotalDebtSum();
+getFromLocalStorage();
 addNewDebtBtn.addEventListener('click', createNewDebtModal)
 
 function createNewPayment(sumValue, listAppend){
@@ -42,13 +42,14 @@ function createNewPayment(sumValue, listAppend){
             modal.remove();
             rewriteBankDebt();
             rewriteTotalDebtSum();
+            setToLocalStorage();
         })
 
         btnsWrp.appendChild(closeBtn);
         btnsWrp.appendChild(acceptBtn);
         modalWrp.appendChild(confirm)
         modalWrp.appendChild(btnsWrp);
-        
+
     })
 
     listElem.appendChild(date);
@@ -57,6 +58,7 @@ function createNewPayment(sumValue, listAppend){
     listAppend.prepend(listElem);
     rewriteBankDebt();
     rewriteTotalDebtSum();
+    setToLocalStorage();
 }
 
 function createNewDebtModal(){
@@ -153,7 +155,8 @@ function addNewDebt(titleName, total){
     container.appendChild(creditWrp);
     container.appendChild(list);
     WRAPPER.appendChild(container);
-    rewriteTotalDebtSum()
+    rewriteTotalDebtSum();
+    setToLocalStorage();
 }
 
 
@@ -183,6 +186,7 @@ WRAPPER.addEventListener('click', function(event){
 
 
 function rewriteBankDebt(){
+    setToLocalStorage();
     let containers = WRAPPER.getElementsByClassName('container');
 
     if(!containers){
@@ -215,4 +219,8 @@ function rewriteTotalDebtSum(){
         TOTAL_DEBT += Number(sumContainer.textContent);
     }
     totalDebtSumDiv.textContent = parseInt(TOTAL_DEBT) + ' руб';
+}
+
+function openContainer(){
+
 }
